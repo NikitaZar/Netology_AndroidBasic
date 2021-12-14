@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="avatar" type="id" />
+    <item name="published_date" type="id" />
+    <item name="more_button_ImageView" type="id" />
+    <item name="header_barrier" type="id" />
+    <item name="post_text" type="id" />
+    <item name="footer_barrier" type="id" />
+    <item name="ic_like" type="id" />
+    <item name="cnt_likes" type="id" />
+    <item name="ic_share" type="id" />
+    <item name="cnt_share" type="id" />
+    <item name="cnt_visibility" type="id" />
+    <item name="ic_visibility" type="id" />
+</resources>

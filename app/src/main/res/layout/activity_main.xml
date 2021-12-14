@@ -14,17 +14,17 @@
         app:layout_constraintBottom_toBottomOf="@id/published_date"
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/title"
+        app:layout_constraintTop_toTopOf="@id/author"
         app:srcCompat="@drawable/ic_netology" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/author"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/space4x"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="@string/netology_title"
+        android:text="@string/sample_author"
         android:theme="@style/text_14sp"
         app:layout_constraintBottom_toTopOf="@id/published_date"
         app:layout_constraintEnd_toStartOf="@id/more_button_ImageView"
@@ -38,9 +38,9 @@
         android:text="@string/sample_date"
         android:theme="@style/text_14sp"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
-        app:layout_constraintEnd_toEndOf="@id/title"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintEnd_toEndOf="@id/author"
+        app:layout_constraintStart_toStartOf="@id/author"
+        app:layout_constraintTop_toBottomOf="@id/author" />
 
     <ImageView
         android:id="@+id/more_button_ImageView"
@@ -56,7 +56,7 @@
         android:layout_height="0dp"
         app:barrierDirection="bottom"
         app:barrierMargin="@dimen/common_margin"
-        app:constraint_referenced_ids="avatar, title, published_date" />
+        app:constraint_referenced_ids="avatar, author, published_date" />
 
     <TextView
         android:id="@+id/post_text"
