@@ -12,4 +12,5 @@
     <item name="cnt_share" type="id" />
     <item name="cnt_visibility" type="id" />
     <item name="ic_visibility" type="id" />
+    <item name="author" type="id" />
 </resources>
