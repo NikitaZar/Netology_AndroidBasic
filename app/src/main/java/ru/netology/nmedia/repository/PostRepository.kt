@@ -1,9 +1,9 @@
 package ru.netology.nmedia.repository
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 interface PostRepository {
-    fun get(): LiveData<Post>
-    fun like()
-    fun share()
+    fun getAll(): MutableLiveData<List<Post>>
+    fun likeById(id: Long)
+    fun shareById(id: Long)
 }
