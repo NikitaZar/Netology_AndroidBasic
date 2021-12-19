@@ -1,42 +1,75 @@
 package ru.netology.nmedia.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class PostRepositoryInMemoryImpl : PostRepository {
 
+    private var startPostId = 1L
     private val data = MutableLiveData(
-        Post(
-            id = 1,
-            author = "Нетология. Университет интернет профессий",
-            publishedDate = "21 Мая в 18:36",
-            postText = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-            cntLikes = 0,
-            cntVisibility = 9_990_000,
-            likeByMe = false
+        listOf(
+            Post(
+                id = startPostId++,
+                author = "Нетология. Университет интернет профессий",
+                publishedDate = "21 Мая в 18:36",
+                postText = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+                cntLikes = 0,
+                cntVisibility = 9_990_000,
+                likeByMe = false
+            ),
+            Post(
+                id = startPostId++,
+                author = "Нетология. Университет интернет профессий",
+                publishedDate = "21 Мая в 18:36",
+                postText = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+                cntLikes = 10,
+                cntVisibility = 30,
+                likeByMe = false
+            ),
+            Post(
+                id = startPostId++,
+                author = "Нетология. Университет интернет профессий",
+                publishedDate = "21 Мая в 18:36",
+                postText = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+                cntLikes = 10,
+                cntVisibility = 30,
+                likeByMe = false
+            ),
+            Post(
+                id = startPostId++,
+                author = "Нетология. Университет интернет профессий",
+                publishedDate = "21 Мая в 18:36",
+                postText = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+                cntLikes = 10,
+                cntVisibility = 30,
+                likeByMe = false
+            )
         )
     )
 
-    override fun get(): LiveData<Post> = data
+    override fun getAll() = data
 
-    override fun like() {
-        var isLikeByMe = data.value?.likeByMe ?: false
-        isLikeByMe = !isLikeByMe
-
-        val cntLikes =
-            when (isLikeByMe) {
-                true -> data.value?.cntLikes?.plus(1)
-                false -> data.value?.cntLikes?.minus(1)
-            } ?: 0
-
-        data.value = data.value?.copy(
-            likeByMe = isLikeByMe,
-            cntLikes = cntLikes
-        )
+    override fun likeById(id: Long) {
+        data.value = data.value?.map {
+            when (it.id == id) {
+                true -> {
+                    val cntLikes = if (it.likeByMe) {
+                        it.cntLikes - 1
+                    } else {
+                        it.cntLikes + 1
+                    }
+                    it.copy(likeByMe = !it.likeByMe, cntLikes = cntLikes)
+                }
+                false -> it
+            }
+        }
     }
 
-    override fun share() {
-        val cntShare = data.value?.cntShare?.plus(1) ?: 0
-        data.value = data.value?.copy(cntShare = cntShare)
+    override fun shareById(id: Long) {
+        data.value = data.value?.map {
+            when (it.id == id) {
+                true -> it.copy(cntShare = it.cntShare + 1)
+                false -> it
+            }
+        }
     }
 }
