@@ -10,8 +10,36 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/posts_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/card_post"/>
+        tools:listitem="@layout/card_post"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/post_text"/>
+
+    <EditText
+        android:id="@+id/post_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/post_text"
+        android:textColorHint="@android:color/darker_gray"
+        android:inputType="textMultiLine"
+        android:padding="@dimen/space1x"
+        android:importantForAutofill="no"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/save_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/save_button"
+        android:layout_width="@dimen/space8x"
+        android:layout_height="@dimen/space8x"
+        android:src="@drawable/ic_baseline_check_circle_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/post_text"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

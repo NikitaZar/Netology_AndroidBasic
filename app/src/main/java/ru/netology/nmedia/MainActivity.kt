@@ -1,13 +1,18 @@
 package ru.netology.nmedia
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
+import ru.netology.nmedia.androidUtils.AndroidUtils
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.postAdapter.OnInteractionListener
 import ru.netology.nmedia.postAdapter.PostsAdapter
 import ru.netology.nmedia.repository.Post
 import ru.netology.nmedia.viewModel.PostViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: PostViewModel by viewModels()
@@ -30,10 +35,34 @@ class MainActivity : AppCompatActivity() {
             }
         }
         )
+
+        binding.saveButton.setOnClickListener {
+            with(binding.postText) {
+                if (text.isNullOrBlank()) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        R.string.content_cant_be_empty,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+                viewModel.changePostText(text.toString())
+                viewModel.save()
+                setText("")
+                clearFocus()
+                AndroidUtils.hideKeyboard(this)
+            }
+        }
+
         binding.postsList.adapter = adapter
         viewModel.data.observe(this)
         { posts ->
-            adapter.submitList(posts)
+            val newPost = adapter.itemCount < posts.size
+            adapter.submitList(posts){
+                if(newPost) {
+                    binding.postsList.smoothScrollToPosition(0)
+                }
+            }
         }
     }
 }
