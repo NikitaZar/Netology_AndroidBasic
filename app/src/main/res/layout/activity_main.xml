@@ -12,25 +12,74 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/card_post"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/post_text"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/card_post" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/edit_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="edit_image, edit_text_title, edit_text, cancel_edit_image" />
+
+    <ImageView
+        android:id="@+id/edit_image"
+        android:layout_width="@dimen/space8x"
+        android:layout_height="@dimen/space8x"
+        android:layout_margin="@dimen/space1x"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toTopOf="@id/post_text"
+        app:layout_constraintEnd_toStartOf="@id/edit_text_title"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/edit_text_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_text"
+        android:textColor="@color/light_blue"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/edit_text"
+        app:layout_constraintEnd_toStartOf="@id/save_button"
+        app:layout_constraintStart_toEndOf="@id/edit_image" />
+
+    <TextView
+        android:id="@+id/edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintBottom_toTopOf="@id/post_text"
+        app:layout_constraintEnd_toStartOf="@id/save_button"
+        app:layout_constraintStart_toStartOf="@id/edit_text_title"
+        tools:text="@string/edit_text" />
+
+    <ImageView
+        android:id="@+id/cancel_edit_image"
+        android:layout_width="@dimen/space8x"
+        android:layout_height="@dimen/space8x"
+        android:layout_margin="@dimen/space1x"
+        android:src="@drawable/ic_baseline_close_24"
+        app:layout_constraintBottom_toTopOf="@id/post_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/edit_text_title" />
 
     <EditText
         android:id="@+id/post_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:hint="@string/post_text"
-        android:textColorHint="@android:color/darker_gray"
+        android:maxLines="6"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:padding="@dimen/space1x"
-        android:importantForAutofill="no"
-        android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/save_button"
+        android:textColorHint="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toStartOf="@id/save_button"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/save_button"
@@ -38,8 +87,6 @@
         android:layout_height="@dimen/space8x"
         android:src="@drawable/ic_baseline_check_circle_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/post_text"
-        />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

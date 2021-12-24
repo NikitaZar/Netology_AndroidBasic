@@ -43,4 +43,9 @@ class PostViewModel : ViewModel() {
             edited.value = it.copy(postText = text)
         }
     }
+
+    fun cancelEdit(){
+        edited.value = empty
+    }
+
 }

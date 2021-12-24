@@ -8,5 +8,6 @@
     <string name="remove">Remove</string>
     <string name="edit">Edit</string>
     <string name="post_text">Post text</string>
+    <string name="edit_text">Edit Message</string>
     <string name="content_cant_be_empty">Content can\'t be empty</string>
 </resources>
