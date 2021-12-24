@@ -1,5 +1,6 @@
 package ru.netology.nmedia.postAdapter
 
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
@@ -7,8 +8,7 @@ import ru.netology.nmedia.repository.Post
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onShareListener: OnShareListener
+    private val onInteractionListener: OnInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(post: Post) {
@@ -18,14 +18,29 @@ class PostViewHolder(
             postText.text = post.postText
             cntVisibility.text = valueCntPresenter(post.cntVisibility)
             icLike.setImageResource(likeByMeIcon(post.likeByMe))
-            icLike.setOnClickListener{
-                onLikeListener(post)
+            icLike.setOnClickListener {
+                onInteractionListener.onLike(post)
             }
             cntLikes.text = valueCntPresenter(post.cntLikes)
-            icShare.setOnClickListener{
-                onShareListener(post)
+            icShare.setOnClickListener {
+                onInteractionListener.onShare(post)
             }
             cntShare.text = valueCntPresenter(post.cntShare)
+        }
+        binding.moreButtonImageView.setOnClickListener {
+            PopupMenu(it.context, it).apply {
+                inflate(R.menu.post_menu)
+                setOnMenuItemClickListener { item ->
+                    when (item.itemId) {
+                        R.id.remove -> {
+                            onInteractionListener.onRemove(post)
+                            true
+                        }
+                        else -> false
+                    }
+
+                }
+            }.show()
         }
     }
 }

@@ -1,5 +1,6 @@
 package ru.netology.nmedia.repository
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -71,5 +72,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 false -> it
             }
         }
+    }
+
+    override fun removeById(id: Long) {
+        data.value = data.value?.filter { it.id != id }
+        Log.i("data", data.value.toString())
     }
 }
