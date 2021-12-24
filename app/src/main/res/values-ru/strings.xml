@@ -3,7 +3,8 @@
     <string name="app_name">NMedia</string>
     <string name="nmedia">НМедиа!</string>
     <string name="sample_date">21 Мая 18:36</string>
-    <string name="Remove">Удалить</string>
+    <string name="remove">Удалить</string>
     <string name="post_text">Текст поста</string>
     <string name="content_cant_be_empty">Содержимое поста не может быть пустым</string>
+    <string name="edit">Редактировать</string>
 </resources>

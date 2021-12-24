@@ -32,6 +32,10 @@ class PostViewHolder(
                 inflate(R.menu.post_menu)
                 setOnMenuItemClickListener { item ->
                     when (item.itemId) {
+                        R.id.edit -> {
+                            onInteractionListener.onEdit(post)
+                            true
+                        }
                         R.id.remove -> {
                             onInteractionListener.onRemove(post)
                             true

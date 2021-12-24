@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
                 viewModel.shareById(post.id)
             }
 
+            override fun onEdit(post: Post) {
+                viewModel.edit(post)
+            }
+
             override fun onRemove(post: Post) {
                 viewModel.removeById(post.id)
             }
@@ -55,13 +59,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.postsList.adapter = adapter
-        viewModel.data.observe(this)
-        { posts ->
+        viewModel.data.observe(this) { posts ->
             val newPost = adapter.itemCount < posts.size
-            adapter.submitList(posts){
-                if(newPost) {
+            adapter.submitList(posts) {
+                if (newPost) {
                     binding.postsList.smoothScrollToPosition(0)
                 }
+            }
+        }
+        viewModel.edited.observe(this) { post ->
+            if (post.id == 0L) {
+                return@observe
+            }
+            with(binding.postText) {
+                requestFocus()
+                setText(post.postText)
             }
         }
     }

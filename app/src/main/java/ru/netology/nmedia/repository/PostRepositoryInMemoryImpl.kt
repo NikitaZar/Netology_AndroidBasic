@@ -77,16 +77,21 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
 
     override fun save(post: Post) {
-        val posts = data.value ?: emptyList()
-        data.value = listOf(
-            post.copy(
-                id = nextPostId++,
-                author = "Me",
-                likeByMe = false,
-                publishedDate = getCurrentTimeAsString()
-            )
-        ) + posts
-        //return
+        if (post.id == 0L) {
+            val posts = data.value ?: emptyList()
+            data.value = listOf(
+                post.copy(
+                    id = nextPostId++,
+                    author = "Me",
+                    likeByMe = false,
+                    publishedDate = getCurrentTimeAsString()
+                )
+            ) + posts
+            return
+        }
+        data.value = data.value?.map {
+            if (it.id != post.id) it else it.copy(postText = post.postText)
+        }
     }
 
     override fun removeById(id: Long) {
