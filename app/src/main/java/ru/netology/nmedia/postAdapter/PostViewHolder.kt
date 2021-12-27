@@ -17,17 +17,18 @@ class PostViewHolder(
             publishedDate.text = post.publishedDate
             postText.text = post.postText
             cntVisibility.text = valueCntPresenter(post.cntVisibility)
-            icLike.setImageResource(likeByMeIcon(post.likeByMe))
-            icLike.setOnClickListener {
+            btLike.isChecked = post.likeByMe
+            btLike.text = valueCntPresenter(post.cntLikes)
+            btLike.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
-            cntLikes.text = valueCntPresenter(post.cntLikes)
-            icShare.setOnClickListener {
+            btShare.text = valueCntPresenter(post.cntShare)
+            btShare.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
-            cntShare.text = valueCntPresenter(post.cntShare)
+
         }
-        binding.moreButtonImageView.setOnClickListener {
+        binding.btOptions.setOnClickListener {
             PopupMenu(it.context, it).apply {
                 inflate(R.menu.post_menu)
                 setOnMenuItemClickListener { item ->
@@ -55,9 +56,3 @@ fun valueCntPresenter(value: Int) = when (value) {
     in 1100..999_999 -> "${(value / 1_000)}K"
     else -> "${String.format("%.1f", (value.toDouble() / 1_000_000))}M"
 }
-
-fun likeByMeIcon(isLikedByMe: Boolean) =
-    when (isLikedByMe) {
-        true -> R.drawable.ic_baseline_favorite_24
-        false -> R.drawable.ic_favorite_border
-    }
