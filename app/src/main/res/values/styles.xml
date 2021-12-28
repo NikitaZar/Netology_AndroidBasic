@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="text_14sp">
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Widget.AppTheme.CommonTextButton"
+        parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">@color/gray</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Widget.AppTheme.LikeButton"
+        parent="Widget.AppTheme.CommonTextButton">
+        <item name="iconTint">@color/like_button_tint</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.AppTheme.CommonIconOnlyButton"
+        parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="iconTint">@color/gray</item>
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">@dimen/space3x</item>
+        <item name="android:paddingRight">@dimen/space3x</item>
+        <item name="android:minWidth">@dimen/space12x</item>
+        <item name="android:minHeight">@dimen/space12x</item>
+        <item name="strokeWidth">0dp</item>
     </style>
 </resources>
