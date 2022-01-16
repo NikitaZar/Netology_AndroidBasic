@@ -1,6 +1,9 @@
 package ru.netology.nmedia.postAdapter
 
+import android.util.Log
+import android.view.View
 import android.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
@@ -26,7 +29,7 @@ class PostViewHolder(
             btShare.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
-
+            videoGroup.isVisible = (post.uriVideo != "")
         }
         binding.btOptions.setOnClickListener {
             PopupMenu(it.context, it).apply {
@@ -46,6 +49,13 @@ class PostViewHolder(
 
                 }
             }.show()
+        }
+
+        binding.videoGroup.referencedIds.forEach { id ->
+            binding.root.findViewById<View>(id).setOnClickListener {
+                onInteractionListener.onVideoShare(post)
+                Log.i("onVideoShare", "onVideoShare")
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 package ru.netology.nmedia.activities
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -19,6 +21,10 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: PostViewModel by viewModels()
+
+    companion object {
+        private const val VIDEO_MIME_TYPE = "video/*"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +59,11 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onRemove(post: Post) {
                     viewModel.removeById(post.id)
+                }
+
+                override fun onVideoShare(post: Post) {
+                    val shareVideoIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.uriVideo))
+                    startActivity(shareVideoIntent)
                 }
             }
         )
