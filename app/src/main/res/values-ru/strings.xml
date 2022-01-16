@@ -8,4 +8,5 @@
     <string name="content_cant_be_empty">Содержимое поста не может быть пустым</string>
     <string name="edit">Редактировать</string>
     <string name="edit_text">Редактирование</string>
+    <string name="cancel">Отмена</string>
 </resources>

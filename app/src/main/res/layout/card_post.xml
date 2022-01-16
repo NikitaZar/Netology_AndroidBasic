@@ -71,13 +71,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/header_barrier" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/video_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="video_pic, ic_play_video" />
+
+    <ImageView
+        android:id="@+id/video_pic"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/space2x"
+        app:layout_constraintTop_toBottomOf="@id/post_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ic_cyclist_penguin"
+        />
+
+    <ImageView
+        android:id="@+id/ic_play_video"
+        android:layout_width="@dimen/space16x"
+        android:layout_height="@dimen/space16x"
+        app:layout_constraintStart_toStartOf="@id/video_pic"
+        app:layout_constraintEnd_toEndOf="@id/video_pic"
+        app:layout_constraintTop_toTopOf="@id/video_pic"
+        app:layout_constraintBottom_toBottomOf="@id/video_pic"
+        android:src="@drawable/ic_baseline_play_circle_filled_24"
+        />
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/footer_barrier"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:barrierDirection="bottom"
         app:barrierMargin="@dimen/common_margin"
-        app:constraint_referenced_ids="post_text" />
+        app:constraint_referenced_ids="video_pic" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_like"
