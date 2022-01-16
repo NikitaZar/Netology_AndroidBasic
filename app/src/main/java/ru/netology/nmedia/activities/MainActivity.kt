@@ -22,9 +22,6 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private val viewModel: PostViewModel by viewModels()
 
-    companion object {
-        private const val VIDEO_MIME_TYPE = "video/*"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
