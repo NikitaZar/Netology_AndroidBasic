@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidBasic_HW">
         <activity
+            android:name=".activities.EditPostActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".activities.NewPostActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.MainActivity"
             android:exported="true">
