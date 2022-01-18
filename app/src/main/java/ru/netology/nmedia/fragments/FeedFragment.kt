@@ -1,38 +1,33 @@
-package ru.netology.nmedia.activities
+package ru.netology.nmedia.fragments
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import ru.netology.nmedia.EditPostResultContract
-import ru.netology.nmedia.databinding.ActivityMainBinding
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import ru.netology.nmedia.R
+import ru.netology.nmedia.databinding.FragmentFeedBinding
+import ru.netology.nmedia.fragments.EditPostFragment.Companion.textArg
 import ru.netology.nmedia.postAdapter.OnInteractionListener
 import ru.netology.nmedia.postAdapter.PostsAdapter
 import ru.netology.nmedia.repository.Post
 import ru.netology.nmedia.viewModel.PostViewModel
-import java.util.*
 
-class MainActivity : AppCompatActivity() {
-    private val viewModel: PostViewModel by viewModels()
+class FeedFragment : Fragment() {
+    private val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
 
-        val newPostLauncher = registerForActivityResult(EditPostResultContract()) { postText ->
-            postText ?: return@registerForActivityResult
-            viewModel.changePostText(postText)
-            viewModel.save()
-        }
-
-        val editPostLauncher = registerForActivityResult(EditPostResultContract()) { postText ->
-            postText ?: return@registerForActivityResult
-            viewModel.changePostText(postText)
-            viewModel.save()
-        }
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val binding = FragmentFeedBinding.inflate(layoutInflater, container, false)
 
         val adapter = PostsAdapter(
             object : OnInteractionListener {
@@ -60,18 +55,22 @@ class MainActivity : AppCompatActivity() {
         )
 
         binding.addButton.setOnClickListener {
-            newPostLauncher.launch("")
+            findNavController().navigate(R.id.action_feedFragment_to_editPostFragment)
         }
 
-        viewModel.edited.observe(this) { post ->
+        viewModel.edited.observe(viewLifecycleOwner) { post ->
             if (post.id != 0L) {
-                editPostLauncher.launch(post.postText)
+                findNavController().navigate(
+                    R.id.action_feedFragment_to_editPostFragment,
+                    Bundle().apply {
+                        textArg = post.postText
+                    })
             }
         }
 
         binding.postsList.adapter = adapter
 
-        viewModel.data.observe(this) { posts ->
+        viewModel.data.observe(viewLifecycleOwner) { posts ->
             val newPost = adapter.itemCount < posts.size
             adapter.submitList(posts) {
                 if (newPost) {
@@ -79,5 +78,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        return binding.root
     }
 }
