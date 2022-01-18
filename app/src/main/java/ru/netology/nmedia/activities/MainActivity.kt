@@ -4,14 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
-import androidx.activity.result.launch
 import androidx.activity.viewModels
-import androidx.constraintlayout.widget.Group
-import androidx.core.view.isVisible
 import ru.netology.nmedia.EditPostResultContract
-import ru.netology.nmedia.NewPostResultContract
-import ru.netology.nmedia.androidUtils.AndroidUtils
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.postAdapter.OnInteractionListener
 import ru.netology.nmedia.postAdapter.PostsAdapter
@@ -28,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { postText ->
+        val newPostLauncher = registerForActivityResult(EditPostResultContract()) { postText ->
             postText ?: return@registerForActivityResult
             viewModel.changePostText(postText)
             viewModel.save()
@@ -66,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         binding.addButton.setOnClickListener {
-            newPostLauncher.launch()
+            newPostLauncher.launch("")
         }
 
         viewModel.edited.observe(this) { post ->

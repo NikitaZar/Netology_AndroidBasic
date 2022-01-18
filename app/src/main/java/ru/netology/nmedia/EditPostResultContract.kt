@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
 import ru.netology.nmedia.activities.EditPostActivity
-import ru.netology.nmedia.activities.NewPostActivity
 
 class EditPostResultContract : ActivityResultContract<String, String?>() {
     override fun createIntent(context: Context, input: String): Intent =

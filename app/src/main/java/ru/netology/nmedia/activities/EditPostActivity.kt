@@ -4,11 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import ru.netology.nmedia.EditPostResultContract
-import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.ActivityEditPostBinding
-import ru.netology.nmedia.databinding.ActivityNewPostBinding
 
 class EditPostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
