@@ -1,7 +1,6 @@
 package ru.netology.nmedia.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +28,6 @@ class EditPostFragment : Fragment() {
         val binding = FragmentEditPostBinding.inflate(layoutInflater, container, false)
 
         arguments?.textArg?.let {
-            Log.i("arguments?.textArg?", it)
             binding.editText.setText(it)
         }
         binding.editText.requestFocus()

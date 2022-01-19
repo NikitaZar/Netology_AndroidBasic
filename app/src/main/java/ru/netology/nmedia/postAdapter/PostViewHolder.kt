@@ -4,6 +4,9 @@ import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
 import androidx.core.view.isVisible
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
@@ -30,31 +33,34 @@ class PostViewHolder(
                 onInteractionListener.onShare(post)
             }
             videoGroup.isVisible = (post.uriVideo != "")
-        }
-        binding.btOptions.setOnClickListener {
-            PopupMenu(it.context, it).apply {
-                inflate(R.menu.post_menu)
-                setOnMenuItemClickListener { item ->
-                    when (item.itemId) {
-                        R.id.edit -> {
-                            onInteractionListener.onEdit(post)
-                            true
+            btOptions.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.post_menu)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.edit -> {
+                                onInteractionListener.onEdit(post)
+                                true
+                            }
+                            R.id.remove -> {
+                                onInteractionListener.onRemove(post)
+                                true
+                            }
+                            else -> false
                         }
-                        R.id.remove -> {
-                            onInteractionListener.onRemove(post)
-                            true
-                        }
-                        else -> false
+
                     }
-
+                }.show()
+            }
+            videoGroup.referencedIds.forEach { id ->
+                binding.root.findViewById<View>(id).setOnClickListener {
+                    onInteractionListener.onVideoShare(post)
+                    Log.i("onVideoShare", "onVideoShare")
                 }
-            }.show()
-        }
+            }
 
-        binding.videoGroup.referencedIds.forEach { id ->
-            binding.root.findViewById<View>(id).setOnClickListener {
-                onInteractionListener.onVideoShare(post)
-                Log.i("onVideoShare", "onVideoShare")
+            root.setOnClickListener {
+                onInteractionListener.onDetailPost(post.id)
             }
         }
     }

@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
+import ru.netology.nmedia.androidUtils.LongArg
 import ru.netology.nmedia.databinding.FragmentFeedBinding
+import ru.netology.nmedia.fragments.DetailPostFragment.Companion.postId
 import ru.netology.nmedia.fragments.EditPostFragment.Companion.textArg
 import ru.netology.nmedia.postAdapter.OnInteractionListener
 import ru.netology.nmedia.postAdapter.PostsAdapter
@@ -51,6 +53,13 @@ class FeedFragment : Fragment() {
                     val shareVideoIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.uriVideo))
                     startActivity(shareVideoIntent)
                 }
+
+                override fun onDetailPost(postId: Long) {
+                    findNavController().navigate(
+                        R.id.action_feedFragment_to_detailPostFragment,
+                        Bundle().apply { this.postId = postId }
+                    )
+                }
             }
         )
 
@@ -62,9 +71,7 @@ class FeedFragment : Fragment() {
             if (post.id != 0L) {
                 findNavController().navigate(
                     R.id.action_feedFragment_to_editPostFragment,
-                    Bundle().apply {
-                        textArg = post.postText
-                    })
+                    Bundle().apply { textArg = post.postText })
             }
         }
 
