@@ -1,7 +1,6 @@
 package ru.netology.nmedia.repository
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -84,7 +83,6 @@ class PostRepositoryFileImpl(val context: Context) : PostRepository {
 
     override fun removeById(id: Long) {
         data.value = data.value?.filter { it.id != id }
-        Log.i("data", data.value.toString())
         sync()
     }
 

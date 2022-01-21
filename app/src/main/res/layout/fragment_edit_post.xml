@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.NewPostActivity">
+    tools:context=".fragments.EditPostFragment">
 
     <EditText
         android:id="@+id/edit_text"
@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:gravity="top"
         android:background="@android:color/transparent"
-        android:hint="@string/post_text"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:padding="@dimen/space1x"
@@ -30,6 +29,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/bottomAppBar"
-        app:srcCompat="@drawable/ic_add_24dp" />
+        app:srcCompat="@drawable/ic_baseline_check_24" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancel_edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/space4x"
+        android:layout_marginVertical="@dimen/space1x"
+        android:textColor="@color/white"
+        android:layout_gravity="bottom|end"
+        style="@style/Widget.AppTheme.CommonTextButton"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
