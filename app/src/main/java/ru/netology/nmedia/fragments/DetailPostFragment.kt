@@ -80,8 +80,8 @@ class DetailPostFragment : Fragment() {
                     }
                 }
 
-                viewModel.data.observe(viewLifecycleOwner) { ListPost ->
-                    ListPost.find { it.id == post.id }?.let {
+                viewModel.data.observe(viewLifecycleOwner) { listPost ->
+                    listPost.find { it.id == post.id }?.let {
                         postVieHolder.bind(it)
                     }
 
