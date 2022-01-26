@@ -100,8 +100,18 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
         db.execSQL(
             """
            UPDATE posts SET
-               likes = likes + CASE WHEN likedByMe THEN -1 ELSE 1 END,
+               cntLikes = cntLikes + CASE WHEN likedByMe THEN -1 ELSE 1 END,
                likedByMe = CASE WHEN likedByMe THEN 0 ELSE 1 END
+           WHERE id = ?;
+        """.trimIndent(), arrayOf(id)
+        )
+    }
+
+    override fun shareById(id: Long) {
+        db.execSQL(
+            """
+           UPDATE posts SET
+               cntShare = cntShare + 1
            WHERE id = ?;
         """.trimIndent(), arrayOf(id)
         )
@@ -126,7 +136,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
                 cntShare = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_CNT_SHARE)),
                 cntVisibility = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_CNT_VISIBILITY)),
                 likeByMe = getInt(getColumnIndexOrThrow(PostColumns.COLUMN_LIKED_BY_ME)) != 0,
-                uriVideo = getString(getColumnIndexOrThrow(PostColumns.COLUMN_URI_VIDEO)),
+                uriVideo = getString(getColumnIndexOrThrow(PostColumns.COLUMN_URI_VIDEO)) ?: "",
             )
         }
     }
