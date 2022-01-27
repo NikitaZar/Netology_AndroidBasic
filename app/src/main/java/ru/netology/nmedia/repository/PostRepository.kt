@@ -8,5 +8,5 @@ interface PostRepository {
     fun shareById(id: Long)
     fun save(post: Post)
     fun removeById(id: Long)
-
+    fun getPostById(id: Long): LiveData<Post>
 }
