@@ -47,5 +47,9 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun cancelEdit(){
+        edited.value = empty
+    }
+
     fun getPostById(id: Long) = repository.getPostById(id)
 }
