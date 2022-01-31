@@ -11,4 +11,8 @@
     <string name="edit_text">Edit Message</string>
     <string name="content_cant_be_empty">Content can\'t be empty</string>
     <string name="cancel">Cancel</string>
+    <string name="notification_user_liked">User %1$s liked %2$s\'s post</string>
+    <string name="channel_remote_description" translatable="false">Notification from remote server</string>
+    <string name="channel_remote_name" translatable="false">Server notification</string>
+    <string name="notification_published">User %s published new post:</string>
 </resources>
