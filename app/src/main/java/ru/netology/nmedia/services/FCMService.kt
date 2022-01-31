@@ -17,6 +17,7 @@ class FCMService : FirebaseMessagingService() {
         private const val action = "action"
         private const val content = "content"
         private const val channelId = "netology"
+        private val actionMap = mapOf("LIKE" to Action.LIKE, "PUBLISHED" to Action.PUBLISHED)
     }
 
     private val gson = Gson()
@@ -41,8 +42,9 @@ class FCMService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
+
         message.data[action]?.let {
-            when (Action.valueOf(it)) {
+            when (actionMap[it]) {
                 Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
                 Action.PUBLISHED -> handlePublished(
                     gson.fromJson(
@@ -50,7 +52,7 @@ class FCMService : FirebaseMessagingService() {
                         Published::class.java
                     )
                 )
-
+                else -> return
             }
         }
     }
@@ -79,8 +81,10 @@ class FCMService : FirebaseMessagingService() {
                 )
             )
             .setContentText(published.postText)
-            .setStyle(NotificationCompat.BigTextStyle()
-                .bigText(published.postText))
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText(published.postText)
+            )
             .build()
 
         NotificationManagerCompat.from(this).notify(
