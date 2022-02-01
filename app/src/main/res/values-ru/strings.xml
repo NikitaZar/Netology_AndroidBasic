@@ -11,4 +11,6 @@
     <string name="cancel">Отмена</string>
     <string name="notification_user_liked">Пользователь %1$s лайкнул пост %2$s</string>
     <string name="notification_published">Пользователь %s опубликовал новый пост:</string>
+    <string name="channel_remote_description">Уведомление от удаленного сервера</string>
+    <string name="channel_remote_name">Уведомление от сервера</string>
 </resources>
